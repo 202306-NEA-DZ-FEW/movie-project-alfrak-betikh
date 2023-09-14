@@ -30,13 +30,13 @@
   outline: none;
   background: transparent;
 }
-.dots li button:hover:before,
+.dots li button:hover,
 .dots li button:focus {
   outline: none;
   opacity: 0.25;
   color: yellow;
 }
-.dots li button:hover .dots li button:focus:before {
+.dots li button:hover:before .dots li button:focus:before {
   opacity: 1;
 }
 .dots li button:before {
