@@ -24,22 +24,20 @@
 
   width: 20px;
   height: 20px;
-  padding: px;
   cursor: pointer;
   color: transparent;
   border: 0;
   outline: none;
   background: transparent;
 }
-.dots li button:hover,
+.dots li button:hover:before,
 .dots li button:focus {
   outline: none;
-}
-.dots li button:hover:before,
-.dots li button:focus:before {
-  opacity: 1;
   opacity: 0.25;
   color: yellow;
+}
+.dots li button:hover .dots li button:focus:before {
+  opacity: 1;
 }
 .dots li button:before {
   font-family: "slick";
@@ -57,7 +55,7 @@
   text-align: center;
 
   opacity: 0.25;
-  color: black;
+  color: rgb(45, 45, 43);
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

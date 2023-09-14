@@ -19,6 +19,7 @@ export default function Home({ latestMovies }) {
     autoplay: true,
     dots: true,
     infinite: true,
+    arrows: false,
     speed: 2500,
     fade: false,
     slidesToShow: 1,
