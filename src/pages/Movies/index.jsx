@@ -26,11 +26,6 @@ function index(){
 
 export default index; */
 
-export default function index({ genres }) {
-  return (
-    <div className="text-fuchsia-950">
-      index
-      {JSON.stringify(genres)}
-    </div>
-  );
+export default function index() {
+  return <div className="text-fuchsia-950">index</div>;
 }

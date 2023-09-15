@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import NavLinks from "./NavLinks";
 import Link from "next/link";
 
-const Navbar = ({ genres }) => {
+const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
     <nav className="bg-white">
-      {console.log({ genres })}
       <div className="flex items-center font-medium justify-around">
         <div className="z-50 p-5 md:w-auto w-full flex justify-between">
           <div className="text-3xl md:hidden" onClick={() => setOpen(!open)}>
@@ -19,7 +18,7 @@ const Navbar = ({ genres }) => {
               Home
             </Link>
           </li>
-          <NavLinks {...genres} />
+          <NavLinks />
         </ul>
         <div className="md:block hidden"></div>
       </div>
