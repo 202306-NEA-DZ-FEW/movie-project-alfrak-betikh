@@ -1,6 +1,10 @@
 import MovieCard from "@/components/Cards/MovieCard";
 import { fetcher } from "@/utils/API";
 import React from "react";
+import { fetcher } from "@/utils/API";
+export async function getServerSideProps() {
+  // Use the fetcher function to retrieve data from the API
+  const data = await fetcher("genre/movie/list?language=en");
 
 export async function getServerSideProps({ query }) {
   let apiUrl;
@@ -24,16 +28,4 @@ export async function getServerSideProps({ query }) {
   };
 }
 
-const index = ({ movies }) => {
-  return (
-    <div className="container px-5 py-24 mx-auto">
-      <div className="flex flex-wrap flex-row">
-        {movies.results.map((movie) => (
-          <MovieCard {...movie} key={movie.id} />
-        ))}
-      </div>
-    </div>
-  );
-};
 
-export default index;
