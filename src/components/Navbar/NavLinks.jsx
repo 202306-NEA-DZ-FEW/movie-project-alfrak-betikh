@@ -1,43 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { fetcher } from "@/utils/API";
 
 export default function NavLinks() {
   const [heading, setHeading] = useState("");
+  const [genreList, setGenreList] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetcher("genre/movie/list");
+        setGenreList(data.genres);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  const genreLinks = genreList.map((genre) => ({
+    name: genre.name,
+    link: `${genre.id}`,
+  }));
+  console.log(genreLinks);
+
   const links = [
     {
       name: "Genres",
       submenu: true,
-      sublinks: [
-        { name: "Action", link: "/28" },
-        { name: "Adventure", link: "/12" },
-        { name: "Animation", link: "/16" },
-        { name: "Comedy", link: "/35" },
-        { name: "Crime", link: "/80" },
-        { name: "Documentary", link: "/99" },
-        { name: "Drama", link: "/18" },
-        { name: "Family", link: "/10751" },
-        { name: "Fantasy", link: "/14" },
-        { name: "History", link: "/36" },
-        { name: "Horror", link: "/27" },
-        { name: "Music", link: "/10402" },
-        { name: "Mystery", link: "/9648" },
-        { name: "Romance", link: "/10749" },
-        { name: "Science Fiction", link: "/878" },
-        { name: "TV Movie", link: "/10770" },
-        { name: "Thriller", link: "/53" },
-        { name: "War", link: "/10752" },
-        { name: "Western", link: "/37" },
-      ],
+      sublinks: genreLinks,
+      queryParam: "genre",
     },
     {
       name: "Filters",
       submenu: true,
+      queryParam: "type",
       sublinks: [
-        { name: "Top Rated", link: "/" },
-        { name: "Popular", link: "/" },
-        { name: "Latest", link: "/" },
-        { name: "Now playing", link: "/" },
-        { name: "Upcoming", link: "/" },
+        { name: "Top Rated", link: "top_rated" },
+        { name: "Popular", link: "popular" },
+        { name: "Latest", link: "latest" },
+        { name: "Now playing", link: "now_playing" },
+        { name: "Upcoming", link: "upcoming" },
       ],
     },
     {
@@ -74,7 +78,7 @@ export default function NavLinks() {
             </h1>
             {link.submenu && (
               <div>
-                <div className="absolute top-20 hidden group-hover:md:block hover:md:block">
+                <div className="absolute z-20 top-20 hidden group-hover:md:block hover:md:block">
                   <div className="py-3">
                     <div className="w-4 h-4 left-3 absolute mt-1 bg-white rotate-45"></div>
                   </div>
@@ -87,8 +91,10 @@ export default function NavLinks() {
                         <ul>
                           <li className="text-sm text-gray-600 my-2.5">
                             <Link
-                              href={sublink.link}
-                              className="hover:text-primary"
+                              href={{
+                                pathname: "/Movies",
+                                query: { [link.queryParam]: sublink.link },
+                              }}
                             >
                               {sublink.name}
                             </Link>
