@@ -1,5 +1,13 @@
 import React from "react";
+import Navbar from "./Navbar/Navbar";
+import Footer from "./Footer/Footer";
 
-export const Layout = () => {
-  return <div>Layout</div>;
-};
+export default function Layout({ children }) {
+  return (
+    <div className="max-h-screen">
+      <Navbar />
+      {children}
+      <Footer />
+    </div>
+  );
+}
