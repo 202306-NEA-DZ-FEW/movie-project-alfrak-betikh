@@ -1,31 +1,41 @@
-import React from "react";
+import MovieCard from "@/components/Cards/MovieCard";
 import { fetcher } from "@/utils/API";
-export async function getServerSideProps() {
-  // Use the fetcher function to retrieve data from the API
-  const data = await fetcher("genre/movie/list?language=en");
+import React from "react";
 
-  // Extract genres names
-  const genresArray = data.genres.map((genre) => ({
-    name: genre.name,
-    link: "/" + genre.id,
-  }));
+export async function getServerSideProps({ query }) {
+  let apiUrl;
+
+  if (query.genre) {
+    // If a genre query is present, fetch movies by genre
+    const genre = query.genre;
+    apiUrl = `discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genre}`;
+  } else if (query.type == "latest") {
+    apiUrl = "trending/all/day?language=en-US";
+  } else {
+    const listType = query.type;
+    apiUrl = `movie/${listType}`;
+  }
+
+  const data = await fetcher(apiUrl);
 
   return {
     props: {
-      genres: genresArray, // Pass the genres array to the component
+      movies: data,
     },
   };
 }
 
-/* 
-function index(){
+const index = ({ movies }) => {
   return (
-    <div>index</div>
-  )
-}
+    <div className="container px-5 py-24 mx-auto">
+      {console.log({ movies })}
+      <div className="flex flex-wrap -m-4">
+        {movies.results.map((movie) => (
+          <MovieCard {...movie} key={movie.id} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default index; */
-
-export default function index() {
-  return <div className="text-fuchsia-950">index</div>;
-}
+export default index;

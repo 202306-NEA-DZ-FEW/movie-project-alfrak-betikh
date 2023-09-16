@@ -1,9 +1,9 @@
-import { Card } from "@/components/Card/Card";
 import { fetcher } from "@/utils/API";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
+import { Card } from "@/components/Cards/Card";
 
 export async function getStaticProps() {
   const data = await fetcher("trending/all/day?language=en-US");
