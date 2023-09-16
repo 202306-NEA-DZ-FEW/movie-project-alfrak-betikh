@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
-import Footer from "@/components/Footer/Footer";
+
 export async function getStaticProps() {
   const data = await fetcher("trending/all/day?language=en-US");
   return {
@@ -57,7 +57,6 @@ export default function Home({ latestMovies }) {
           ))}
         </Slider>
       </div>
-      <Footer />
     </div>
   );
 }
