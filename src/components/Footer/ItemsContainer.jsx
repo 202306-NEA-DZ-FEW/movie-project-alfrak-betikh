@@ -1,5 +1,5 @@
 import Item from "./Item";
-import { OUSSAMA, ZOHIR, LAID, HADIA, SARAH } from "@/pages/Menus";
+import { OUSSAMA, ZOHIR, LAID, HADIA, SARAH } from "@/components/Menus";
 const ItemsContainer = () => {
   return (
     <div className=" text-center grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:px-8 px-6 py-16">
