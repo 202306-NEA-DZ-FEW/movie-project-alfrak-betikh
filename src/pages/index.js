@@ -1,9 +1,9 @@
-import { Card } from "@/components/Card/Card";
 import { fetcher } from "@/utils/API";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
+import { Card } from "@/components/Cards/Card";
 
 export async function getStaticProps() {
   const data = await fetcher("trending/all/day?language=en-US");
@@ -31,9 +31,9 @@ export default function Home({ latestMovies }) {
 
   return (
     <div className="flex flex-row  mt-24">
-      <div class="flex flex-wrap mx-auto mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
-        <div class="w-full sm:p-4 px-4 mb-6">
-          <h1 class="title-font font-medium text-6xl mb-2 dark:text-gray-200 text-black">
+      <div className="flex flex-wrap mx-auto mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
+        <div className="w-full sm:p-4 px-4 mb-6">
+          <h1 className="title-font font-medium text-6xl mb-2 dark:text-gray-200 text-black">
             Welcome to the Ultimate Movie Destination
           </h1>
           <p className="leading-relaxed dark:text-white text-black">
