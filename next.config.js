@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["image.tmdb.org"], // Add your image domains here
+    formats : ['image/avif', 'image/webp' ,],
+    domains: ["image.tmdb.org"],
   },
 };
 
