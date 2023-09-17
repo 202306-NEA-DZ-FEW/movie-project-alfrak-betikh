@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // darkMode: "class",
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -16,7 +16,12 @@ module.exports = {
     fontFamily:{
       'Calvino':['Calvino-Grande-Light-trial'],
       'Room':['Room-thin']
-    }
+    },
+     colors: {
+        bkg: "rgb(var(--color-bkg) / <alpha-value>)",
+        content: "rgb(var(--color-content) / <alpha-value>)",
+        accent: "rgb(var(--color-accent) / <alpha-value>)",
+      },
     },
   },
   plugins: [],
