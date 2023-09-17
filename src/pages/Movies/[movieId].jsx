@@ -8,8 +8,11 @@ import React, { useState } from "react";
 
 const MovieDetail = ({ movie, similarMovies, videos }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  let videoId;
   const trailers = videos.results.filter((item) => item.type === "Trailer");
-  const videoId = trailers[0].key;
+  if (trailers[0]) {
+    videoId = trailers[0].key;
+  }
   console.log(movie);
   console.log("similar", similarMovies);
   const settings = {
@@ -88,17 +91,19 @@ const MovieDetail = ({ movie, similarMovies, videos }) => {
                     ))}
                   </div>
                 </div>
-                <div className=" max-w-screen-lg mt-5 flex justify-center">
-                  <iframe
-                    width="320"
-                    height="180"
-                    src={`https://www.youtube.com/embed/${videoId}`}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    frameBorder="1"
-                    allowFullScreen
-                  ></iframe>
-                </div>
+                {videoId && (
+                  <div className=" max-w-screen-lg mt-5 flex justify-center">
+                    <iframe
+                      width="320"
+                      height="180"
+                      src={`https://www.youtube.com/embed/${videoId}`}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      frameBorder="1"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -19,7 +19,9 @@ export async function getServerSideProps({ query }) {
     default:
       if (query.genre) {
         const genre = query.genre;
-        apiUrl = `discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genre}`;
+        apiUrl = `discover/movie?include_adult=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genre}`;
+      } else if (query.search) {
+        apiUrl = `search/movie?query=${query.search}&include_adult=false&language=en-US`;
       } else {
         apiUrl = "trending/all/day?language=en-US";
       }

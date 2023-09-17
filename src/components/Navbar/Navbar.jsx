@@ -44,7 +44,7 @@ const Navbar = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 -ml-1 mr-3 text-black hover:text-accent"
+                  className="h-6 w-6 -ml-1 mr-3 text-content hover:text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -62,7 +62,7 @@ const Navbar = () => {
               <svg
                 onClick={handleDelete}
                 xmlns="http://www.w3.org/2000/svg"
-                className="ml-3 h-5 w-5 text-black hover:text-accent"
+                className="ml-3 h-5 w-5 text-content hover:text-accent"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -79,11 +79,11 @@ const Navbar = () => {
         </div>
         <ul
           className={`
-        md:hidden bg-white fixed w-full top-0 overflow-y-auto bottom-0 py-24 pl-4
+        md:hidden bg-bkg fixed w-full z-20 top-0 overflow-y-auto bottom-0 py-24 pl-4
         duration-500 ${open ? "left-0" : "left-[-100%]"}
         `}
         >
-          <NavLinks />
+          <NavLinks open={open} setOpen={setOpen} />{" "}
           <div className="py-5"></div>
         </ul>
       </div>
