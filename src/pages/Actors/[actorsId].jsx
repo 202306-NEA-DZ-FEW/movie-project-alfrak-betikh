@@ -4,18 +4,29 @@ import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import SingleCard from "@/components/Card/SingleCard";
+import { useState } from "react";
 
 export async function getServerSideProps({ params }) {
   const { actorsId } = params;
 
   const actorData = await fetcher(`/person/${actorsId}/movie_credits`);
-  // const actorsBio = await fetcher(`/person/4`)
 
-  // // const actorsInfo = actorsInfo.known.map((person) => ({
-  // //   name: person.name,
+  const actorsBio = await fetcher(`person/${actorsId}`);
 
-  // }))
+  const name = actorsBio.name;
+  const birthday = actorsBio.birthday;
+  const biography = actorsBio.biography;
+  const picture = actorsBio.profile_path;
+
+  const actorsInfo = [
+    {
+      name,
+      birthday,
+      biography,
+      picture,
+    },
+  ];
+
   const originalTitles = actorData.cast.map((castMember) => ({
     title: castMember.original_title,
     posterPath: castMember.poster_path,
@@ -23,15 +34,25 @@ export async function getServerSideProps({ params }) {
   return {
     props: {
       originalTitles,
+      actorsInfo,
     },
   };
 }
 
-const ActorPage = ({ originalTitles }) => {
+function ActorPage({ originalTitles, actorsInfo }) {
+  // State to track whether the biography text is fully displayed or not
+  const [showFullText, setShowFullText] = useState(false);
+
+  // Function to toggle the visibility of the biography text
+  const toggleText = () => {
+    setShowFullText(!showFullText);
+  };
+
+  // Settings for the Slider component
   const settings = {
     centerMode: true,
     centerPadding: "10px",
-    slidesToShow: 4,
+    slidesToShow: 3,
     focusOnSelect: true,
     responsive: [
       {
@@ -54,18 +75,72 @@ const ActorPage = ({ originalTitles }) => {
       },
     ],
   };
-  console.log(originalTitles);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-x-8">
-      <Slider {...settings} className="w-full max-w-[70%] bg-[#450a0a]">
-        {originalTitles.slice(0, 12).map((movie, index) => (
-          <li key={index} className="flex justify-center">
-            <div style={{ marginRight: "25px" }}>
+    <div className=" mx-auto w-full">
+      <div>
+        {actorsInfo.map((actor, index) => (
+          <div key={index} className=" mb-12">
+            <div className="flex justify-center mt-10 mb-10">
+              <div
+                style={{
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  width: "100px",
+                  height: "100px",
+                }}
+              >
+                <Image
+                  className="rounded-full "
+                  src={`https://image.tmdb.org/t/p/w500/${actor.picture}`}
+                  alt="actor"
+                  width={100}
+                  height={100}
+                />
+              </div>
+
+              <h1 className="text-6xl font-bold font-Calvino mt-4 ml-4  ">
+                {actor.name}
+              </h1>
+            </div>
+            <div
+              className=" flex flex-col items-start mx-auto "
+              style={{ width: "70%" }}
+            >
+              <h3 className=" mt-4 text-white mr-10 ml-30 font-Room ">
+                Date of birth: {actor.birthday}
+              </h3>
+              {/* Biography text with conditional class for collapse/expand */}
+              <p
+                className={`text-white mt-4 font-Room ${
+                  showFullText ? "expanded" : "collapsed"
+                }`}
+              >
+                Biography: {actor.biography}
+              </p>
+              {/* "Read More" button */}
+              <button
+                className="text-white underline cursor-pointer "
+                onClick={toggleText}
+              >
+                {showFullText ? "Read Less" : "Read More"}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Slider
+        {...settings}
+        className=" cursor-pointer mx-auto w-full max-w-[70%] bg-[#450a0a]"
+        class="border-radius"
+      >
+        {originalTitles.slice(0, 5).map((movie, index) => (
+          <li key={index} className="">
+            <div style={{ marginRight: "25px", display: "inline-block" }}>
               <Image
                 className=""
                 width={300}
-                height={500}
+                height={400}
                 src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`}
                 alt={movie.title}
               />
@@ -76,28 +151,34 @@ const ActorPage = ({ originalTitles }) => {
           </li>
         ))}
       </Slider>
-      <div
-        className="w-full max-w-[70%] bg-gradient-to-t from-white to-black p-8 mt-8"
-        style={{ paddingBottom: "20px" }}
-      >
-        <div className="flex items-center flex-col">
-          <img src="src\img\Actor.jpeg" alt="actor" />
-          <h1 className="text-black text-6xl font-bold font-'Calvino Grande Trial' mt-4">
-            Tom Holland
-          </h1>
-          <p className="text-center text-black mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi
-            vitae suscipit tellus mauris a diam. Suscipit tellus mauris a diam
-            maecenas sed.
-          </p>
-          <h3 className="text-center mt-4 text-black">
-            Date of birth: 1700/17/17
-          </h3>
-        </div>
-      </div>
+      <style jsx>{`
+        /* Styles for the "Read More" button */
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+        }
+
+        button.hide {
+          display: none;
+        }
+
+        /* Styles for the collapsed and expanded biography text */
+        p.collapsed {
+          max-height: 100px;
+          overflow: hidden;
+          transition: max-height 0.3s ease-in-out;
+        }
+
+        p.expanded {
+          max-height: none;
+          overflow: auto;
+          transition: max-height 0.3s ease-in-out;
+        }
+      `}</style>
     </div>
   );
-};
+}
 
 export default ActorPage;
