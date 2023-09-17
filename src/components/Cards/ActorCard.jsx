@@ -10,9 +10,7 @@ const ActorCard = ({ id, name, profile_path }) => {
         />
       </a>
       <div className="mt-4">
-        <h2 className="text-slate-200 title-font text-lg font-medium">
-          {name}{" "}
-        </h2>
+        <h2 className="text-content title-font text-lg font-medium">{name} </h2>
       </div>
     </div>
   );

@@ -1,17 +1,19 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 function DarkButton() {
   const [isDark, setIsDark] = useState(false);
-  const [buttonText, setButtonText] = useState("🌙");
+
+  //   useEffect(() => {
+  //     // Check if the window object is available (client-side)
+  //     if (typeof window !== "undefined") {
+  //       // Update the isDark state based on the user's machine media preferences
+  //       setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
+  //     }
+  //   }, []);
 
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-      setButtonText("🌙");
-    } else {
-      document.documentElement.classList.remove("dark");
-      setButtonText("☀️");
-    }
+    // Update the data-theme attribute on the :root element
+    document.documentElement.dataset.theme = isDark ? "dark" : "light";
   }, [isDark]);
 
   const toggleDark = () => {
@@ -22,9 +24,9 @@ function DarkButton() {
     <div>
       <button
         onClick={toggleDark}
-        className="bg-gray-200 dark:bg-gray-800 p-2 rounded"
+        className="bg-bkg p-2 rounded transition-colors duration-300 ease-in-out"
       >
-        {buttonText}
+        {isDark ? "🌙" : "☀️"}
       </button>
     </div>
   );
