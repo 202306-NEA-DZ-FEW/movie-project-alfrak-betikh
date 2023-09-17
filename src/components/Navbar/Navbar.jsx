@@ -4,6 +4,7 @@ import NavLinks from "./NavLinks";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import DarkButton from "./DarkButton";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -20,6 +21,7 @@ const Navbar = () => {
             <FontAwesomeIcon icon={open ? faTimes : faBars} />
           </div>
         </div>
+        <DarkButton />
         <ul className="md:flex hidden uppercase items-center gap-8 font-[Poppins]">
           <NavLinks />
         </ul>
