@@ -6,26 +6,27 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useState } from "react";
 
-const MovieDetail = ({ movie, similarMovies }) => {
+const MovieDetail = ({ movie, similarMovies, videos }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const trailers = videos.results.filter((item) => item.type === "Trailer");
+  const videoId = trailers[0].key;
   console.log(movie);
   console.log("similar", similarMovies);
   const settings = {
     autoplay: true,
-    dots: true,
+    dots: false,
     autoplay: !hoveredIndex,
     infinite: true,
-    arrows: false,
+    arrows: true,
     speed: 4000,
     fade: false,
     slidesToShow: 4,
     slidesToScroll: 1,
     slide: "div",
     cssEase: "linear",
-    dotsClass: "dots",
   };
   return (
-    <div className="bg-gradient-to-r from-green-300 to-yellow-200">
+    <div className="">
       <div>
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -37,34 +38,49 @@ const MovieDetail = ({ movie, similarMovies }) => {
                   height={500}
                   src={"http://image.tmdb.org/t/p/w500" + movie.poster_path}
                   alt={movie.title}
-                  className="w-full h-auto md:max-h-96 mx-auto rounded-lg"
+                  className="w-1/2 h-auto  mx-auto rounded-lg"
                 />
               }
             </div>
             <div>
-              <h1 className="text-3xl font-semibold">{movie.title}</h1>
-              <p className="text-gray-600 text-lg mt-2">{movie.tagline}</p>
-              <p className="text-gray-700 text-md mt-4 bg-green-200 rounded-xl px-4 py-4 ">
-                OverView :{movie.overview}
+              <h1 className="text-3xl font-semibold text-content">
+                {movie.title}
+              </h1>
+              <p className="text-content text-lg mt-2 italic">
+                {movie.tagline}
+              </p>
+              <p className="text-black text-md mt-4 bg-accent/80 rounded-xl px-4 py-4 ">
+                <span className="font-bold mr-2">OverView :</span>
+                {movie.overview}
               </p>
               <div className="mt-6">
-                <p className="text-gray-700">
-                  Release Date: {movie.release_date}
+                <p className="text-content">
+                  <span className="font-bold mr-2">Release Date: </span>
+                  {movie.release_date}
                 </p>
-                <p className="text-gray-700">
-                  Runtime: {movie.runtime} minutes
+                <p className="text-content">
+                  <span className="font-bold mr-2">Runtime:</span>{" "}
+                  {movie.runtime} minutes
                 </p>
-                <p className="text-gray-700">Popularity: {movie.popularity}</p>
-                <p className="text-gray-700">
-                  Original Language: {movie.original_language}
+                <p className="text-content">
+                  {" "}
+                  <span className="font-bold mr-2">Popularity: </span>
+                  {movie.popularity}
+                </p>
+                <p className="text-content">
+                  <span className="font-bold mr-2"> Original Language: </span>
+                  {movie.original_language}
                 </p>
                 <div className="flex ">
-                  <p className="text-gray-700">Genres: </p>
-                  <div className="flex ">
+                  <div className="flex mt-5">
+                    <p className="text-content font-bold mr-2">Genres: </p>
                     {movie.genres.map((genre, index) => (
                       <Link
-                        href={""}
-                        className="ml-5 bg-[#645353] w-40 h-8 rounded-lg"
+                        href={{
+                          pathname: "/Movies",
+                          query: { search: genre.name },
+                        }}
+                        className="ml-5 bg-accent text-black p-1 font-bold rounded-lg hover:text-black/20"
                         key={genre.id}
                       >
                         <p className="text-center">{genre.name}</p>{" "}
@@ -72,15 +88,26 @@ const MovieDetail = ({ movie, similarMovies }) => {
                     ))}
                   </div>
                 </div>
+                <div className=" max-w-screen-lg mt-5 flex justify-center">
+                  <iframe
+                    width="320"
+                    height="180"
+                    src={`https://www.youtube.com/embed/${videoId}`}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    frameBorder="1"
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <br />
-      <div className="mt-5  bottom-4 left-0 right-0 mx-auto">
-        <h2 className="text-2xl font-semibold text-center my-8">
-          Similars Movies
+      <div className="mx-20 my-5">
+        <h2 className="text-2xl font-semibold text-center my-8 text-content">
+          Similar Movies
         </h2>
         <Slider {...settings} className="flex flex-row space-x-4 ">
           {similarMovies.results.map((movie, index) => (
@@ -118,11 +145,12 @@ export async function getServerSideProps({ params }) {
   const { movieId } = params;
   const similarData = await fetcher(`movie/${movieId}/similar`);
   const data = await fetcher(`movie/${movieId}`);
-
+  const videos = await fetcher(`movie/${movieId}/videos`);
   return {
     props: {
       movie: data,
       similarMovies: similarData,
+      videos: videos,
     },
   };
 }

@@ -58,7 +58,7 @@ export default function NavLinks() {
         <div key={link.name}>
           <div className="px-3 text-left md:cursor-pointer group">
             <h1
-              className="relative block text-content font-bold mt-5 w-fit  after:block after:content-[''] after:absolute after:h-[3px] after:bg-yellow-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left
+              className="relative block text-gray-300 font-bold mt-5 w-fit  after:block after:content-[''] after:absolute after:h-[3px] after:bg-yellow-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left
               py-7 justify-between items-center md:pr-0 pr-5 group"
               onClick={() => {
                 heading !== link.name ? setHeading(link.name) : setHeading("");
@@ -71,13 +71,13 @@ export default function NavLinks() {
               <div>
                 <div className="absolute z-20 top-20 hidden group-hover:md:block hover:md:block">
                   <div className="py-3">
-                    <div className="w-4 h-4 left-3 absolute mt-1 bg-accent/80 rotate-45"></div>
+                    <div className="w-4 h-4 left-3 absolute mt-1 bg-gray-900/80 rotate-45"></div>
                   </div>
-                  <div className=" bg-accent/80 p-5  grid  z-50 grid-cols-5 gap-5">
+                  <div className=" bg-gray-900/80 p-5 grid  z-50 grid-cols-5 gap-5">
                     {link.sublinks.map((sublink, index) => (
                       <div key={index}>
                         <ul>
-                          <li className="text-sm text-content my-1.5 hover:text-accent">
+                          <li className="text-sm text-white-600 my-1.5 hover:text-yellow-500">
                             <Link
                               href={{
                                 pathname: "/Movies",
@@ -91,6 +91,34 @@ export default function NavLinks() {
                       </div>
                     ))}
                   </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div
+            className={`
+            ${heading === link.name ? "md:hidden" : "hidden"}
+          `}
+          >
+            {link.submenu && (
+              <div>
+                {" "}
+                <div>
+                  {link.sublinks.map((slinks) => (
+                    <div key={slinks.name}>
+                      <h1
+                        onClick={() =>
+                          subHeading !== slinks.name
+                            ? setSubHeading(slinks.name)
+                            : setSubHeading("")
+                        }
+                        className="py-4 pl-7 font-semibold md:pr-0 pr-5 flex justify-between items-center"
+                      >
+                        {slinks.name}
+                      </h1>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
