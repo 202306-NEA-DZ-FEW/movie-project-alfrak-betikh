@@ -1,18 +1,23 @@
 import React from "react";
 import Image from "next/image";
-const MovieCard = ({ id, title, poster_path }) => {
+import Link from "next/link";
+
+const MovieCard = ({ id, title, name, poster_path }) => {
   return (
-    <div className="lg:w-1/4 md:w-1/2 p-4" key={id}>
-      <div className=" relative  rounded">
-        <Image
-          width={500}
-          height={500}
-          className="object-fit object-center w-full h-full  rounded-xl"
-          src={"http://image.tmdb.org/t/p/w500" + poster_path}
-        />
-        <div className="mt-4">
-          <h2 className="text-slate-200 text-center title-font text-lg font-medium">
-            {title}
+    <div className="m-5 w-full text-content hover:text-accent" key={id}>
+      <div className="flex flex-col h-full rounded overflow-hidden">
+        <div className="relative h-48">
+          <Image
+            alt="image"
+            layout="fill"
+            objectFit="contain"
+            className="rounded-xl transition-transform transform hover:scale-110"
+            src={"http://image.tmdb.org/t/p/w500" + poster_path}
+          />
+        </div>
+        <div className="mt-4 flex justify-center">
+          <h2 className=" text-center title-font text-lg font-medium text-wrap break-words max-w-[200px]">
+            {title || name}
           </h2>
         </div>
       </div>
