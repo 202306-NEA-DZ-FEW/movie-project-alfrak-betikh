@@ -6,10 +6,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SingleCard from "@/components/Card/SingleCard";
 
-export async function getServerSideProps(context) {
-  const { id } = context.params;
+export async function getServerSideProps({ params }) {
+  const { actorsId } = params;
 
-  const actorData = await fetcher(`/person/5/movie_credits`);
+  const actorData = await fetcher(`/person/${actorsId}/movie_credits`);
   // const actorsBio = await fetcher(`/person/4`)
 
   // // const actorsInfo = actorsInfo.known.map((person) => ({
@@ -54,6 +54,7 @@ const ActorPage = ({ originalTitles }) => {
       },
     ],
   };
+  console.log(originalTitles);
 
   return (
     <div className="flex flex-col justify-center items-center gap-x-8">
