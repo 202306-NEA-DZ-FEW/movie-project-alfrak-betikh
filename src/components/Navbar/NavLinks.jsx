@@ -23,7 +23,6 @@ export default function NavLinks() {
     name: genre.name,
     link: `${genre.id}`,
   }));
-  console.log(genreLinks);
 
   const links = [
     {
@@ -91,6 +90,33 @@ export default function NavLinks() {
                       </div>
                     ))}
                   </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div
+            className={`
+            ${heading === link.name ? "md:hidden" : "hidden"}
+          `}
+          >
+            {link.submenu && (
+              <div>
+                <div>
+                  {link.sublinks.map((slinks) => (
+                    <div key={slinks.name}>
+                      <h1
+                        onClick={() =>
+                          subHeading !== slinks.name
+                            ? setSubHeading(slinks.name)
+                            : setSubHeading("")
+                        }
+                        className="py-4 pl-7 font-semibold md:pr-0 pr-5 flex justify-between items-center"
+                      >
+                        {slinks.name}
+                      </h1>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
