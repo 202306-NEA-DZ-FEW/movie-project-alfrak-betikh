@@ -5,6 +5,7 @@ const MovieCard = ({ id, title, poster_path }) => {
     <div className="lg:w-1/4 md:w-1/2 p-4" key={id}>
       <div className=" relative  rounded">
         <Image
+          alt="image"
           width={500}
           height={500}
           className="object-fit object-center w-full h-full  rounded-xl"

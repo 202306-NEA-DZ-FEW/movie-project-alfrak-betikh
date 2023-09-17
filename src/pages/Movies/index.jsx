@@ -1,11 +1,13 @@
 import MovieCard from "@/components/Cards/MovieCard";
 import { fetcher } from "@/utils/API";
 import React from "react";
+import Link from "next/link";
+import NavLink from "@/components/Navbar/NavLinks";
 
 export async function getServerSideProps({ query }) {
-  let apiUrl;
+  let apiUrl = "trending/all/day?language=en-US";
 
-  if (query.genre) {
+  /*  if (query.genre) {
     // If a genre query is present, fetch movies by genre
     const genre = query.genre;
     apiUrl = `discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genre}`;
@@ -14,7 +16,7 @@ export async function getServerSideProps({ query }) {
   } else {
     const listType = query.type;
     apiUrl = `movie/${listType}`;
-  }
+  } */
 
   const data = await fetcher(apiUrl);
 
@@ -31,7 +33,9 @@ const index = ({ movies }) => {
       {console.log({ movies })}
       <div className="flex flex-wrap -m-4">
         {movies.results.map((movie) => (
-          <MovieCard {...movie} key={movie.id} />
+          <Link href={"Movies/" + movie.id} key={movie.id}>
+            <MovieCard {...movie} />
+          </Link>
         ))}
       </div>
     </div>
