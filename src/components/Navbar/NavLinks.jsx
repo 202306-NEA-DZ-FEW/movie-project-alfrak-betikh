@@ -23,7 +23,6 @@ export default function NavLinks() {
     name: genre.name,
     link: `${genre.id}`,
   }));
-  console.log(genreLinks);
 
   const links = [
     {
@@ -103,7 +102,6 @@ export default function NavLinks() {
           >
             {link.submenu && (
               <div>
-                {" "}
                 <div>
                   {link.sublinks.map((slinks) => (
                     <div key={slinks.name}>

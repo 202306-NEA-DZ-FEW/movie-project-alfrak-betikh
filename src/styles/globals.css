@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   :root[data-theme="light"] {
     --color-bkg: 238 238 238;
