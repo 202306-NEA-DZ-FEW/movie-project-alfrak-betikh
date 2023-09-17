@@ -12,7 +12,7 @@ const MovieCard = ({ id, title, poster_path }) => {
           src={"http://image.tmdb.org/t/p/w500" + poster_path}
         />
         <div className="mt-4">
-          <h2 className="text-slate-200 text-center title-font text-lg font-medium">
+          <h2 className="text-content text-center title-font text-lg font-medium">
             {title}
           </h2>
         </div>
