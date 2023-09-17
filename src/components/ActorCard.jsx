@@ -1,15 +1,22 @@
 import React from "react";
+import Image from "next/image";
 
 const ActorCard = ({ id, name, profile_path }) => {
   return (
-    <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={id}>
-      <a className="block relative h-48 rounded overflow-hidden">
-        <image
-          className="object-fit object-center w-full h-full block rounded-xl"
+    <div
+      className="m-2 flex flex-col flex-wrap gap-2 justify-center items-center "
+      key={id}
+    >
+      <div className="flex justify-center items-center">
+        <Image
+          width={100}
+          height={220}
+          className="w-full"
           src={"http://image.tmdb.org/t/p/w500" + profile_path}
+          alt=""
         />
-      </a>
-      <div className="mt-4">
+      </div>
+      <div className="mt-4 ">
         <h2 className="text-slate-200 title-font text-lg font-medium">
           {name}{" "}
         </h2>
