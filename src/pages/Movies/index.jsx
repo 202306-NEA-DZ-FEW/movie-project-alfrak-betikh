@@ -11,6 +11,8 @@ export async function getServerSideProps({ query }) {
     apiUrl = `discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=${genre}`;
   } else if (query.type == "latest") {
     apiUrl = "trending/all/day?language=en-US";
+  } else if (query.search) {
+    apiUrl = `search/movie?query=${query.search}`;
   } else {
     const listType = query.type;
     apiUrl = `movie/${listType}`;
