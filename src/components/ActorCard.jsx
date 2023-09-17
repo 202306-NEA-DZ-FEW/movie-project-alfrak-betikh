@@ -13,6 +13,7 @@ const ActorCard = ({ id, name, profile_path }) => {
           height={220}
           className="w-full"
           src={"http://image.tmdb.org/t/p/w500" + profile_path}
+          alt=""
         />
       </div>
       <div className="mt-4 ">

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export async function getServerSideProps() {
   //   Use the fetcher function to retrieve data from the API
-  const data = await fetcher("person/popular?language=en-US&page=1");
+  const data = await fetcher("person/popular");
 
   return {
     props: {
@@ -20,11 +20,9 @@ const index = ({ actors }) => {
       {console.log({ actors })}
       <div className="flex flex-wrap -m-4">
         {actors.results.map((actor) => (
-          <div key={actor.id}>
-            <Link href={"/Actors/1"}>
-              <ActorCard {...actor} />
-            </Link>
-          </div>
+          <Link key={actor.id} href={"/Actors/" + actor.id}>
+            <ActorCard {...actor} />
+          </Link>
         ))}
       </div>
     </div>
