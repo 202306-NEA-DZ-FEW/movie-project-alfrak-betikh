@@ -8,7 +8,8 @@ const MovieCard = ({ id, title, name, poster_path }) => {
       <div className="flex flex-col h-full rounded ">
         <div className="relative h-48">
           <Image
-            alt="image"
+            loading="lazy"
+            alt={name || title}
             layout="fill"
             className="rounded-xl object-contain"
             src={"http://image.tmdb.org/t/p/w500" + poster_path}
