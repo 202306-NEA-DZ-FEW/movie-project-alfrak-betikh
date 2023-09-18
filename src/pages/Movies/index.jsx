@@ -3,9 +3,10 @@ import Pagination from "@/components/Pagination";
 import { fetcher } from "@/utils/API";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
+import { Suspense } from "react";
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, req }) {
   let apiUrl;
   const page = parseInt(query.page, 10) || 1;
   switch (query.type) {
@@ -34,12 +35,20 @@ export async function getServerSideProps({ query }) {
     props: {
       movies: data,
       currentPage: page,
+      query,
     },
   };
 }
 
-const index = ({ movies, currentPage }) => {
-  const getPageLink = (page) => `?page=${page}`;
+const Index = ({ movies, currentPage, query }) => {
+  const router = useRouter();
+  const getPageLink = (page) => {
+    const updatedQuery = {
+      ...query,
+      page: page.toString(),
+    };
+    return { pathname: router.pathname, query: updatedQuery };
+  };
   const totalPages = 50;
 
   return (
@@ -56,10 +65,11 @@ const index = ({ movies, currentPage }) => {
           currentPage={currentPage}
           totalPages={totalPages}
           getPageLink={getPageLink}
+          query={query}
         />
       </div>
     </div>
   );
 };
 
-export default index;
+export default Index;

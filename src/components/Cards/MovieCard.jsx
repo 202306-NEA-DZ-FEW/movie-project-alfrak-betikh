@@ -11,7 +11,6 @@ const MovieCard = ({ id, title, name, poster_path }) => {
         <div className="relative h-48">
           {hasPoster ? (
             <Image
-              loading="lazy"
               alt={name || title}
               layout="fill"
               className="rounded-xl object-contain"
@@ -19,7 +18,6 @@ const MovieCard = ({ id, title, name, poster_path }) => {
             />
           ) : (
             <Image
-              loading="lazy"
               alt={name || title}
               layout="fill"
               className="rounded-xl object-contain"

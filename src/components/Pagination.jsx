@@ -6,19 +6,16 @@ const Pagination = ({ currentPage, totalPages, getPageLink }) => {
   const { query } = router;
 
   const renderPageLink = (page) => {
-    const newQuery = {
+    const updatedQuery = {
       ...query,
       page: page.toString(),
     };
 
-    for (const key in newQuery) {
-      if (newQuery[key] === undefined || newQuery[key] === null) {
-        delete newQuery[key];
-      }
-    }
-
     return (
-      <Link href={{ pathname: router.pathname, query: newQuery }}>
+      <Link
+        href={{ pathname: router.pathname, query: updatedQuery }}
+        key={page}
+      >
         <li
           className={`relative block rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent ${
             currentPage === page ? "bg-accent text-white" : ""
@@ -31,7 +28,10 @@ const Pagination = ({ currentPage, totalPages, getPageLink }) => {
   };
 
   const renderDots = () => (
-    <li className="relative block rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent">
+    <li
+      key="dots"
+      className="relative block rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent"
+    >
       ...
     </li>
   );
@@ -53,7 +53,7 @@ const Pagination = ({ currentPage, totalPages, getPageLink }) => {
   return (
     <ul className="list-style-none flex">
       {currentPage > 1 && (
-        <Link href={getPageLink(currentPage - 1)}>
+        <Link href={getPageLink(currentPage - 1)} key="prev">
           <li className="relative block font-bold rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent">
             Previous
           </li>
@@ -75,8 +75,8 @@ const Pagination = ({ currentPage, totalPages, getPageLink }) => {
       {renderLastPage()}
 
       {currentPage < totalPages - 1 && (
-        <Link href={getPageLink(currentPage + 1)}>
-          <li className="relative  font-bold  block rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent">
+        <Link href={getPageLink(currentPage + 1)} key="next">
+          <li className="relative block font-bold rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent">
             Next
           </li>
         </Link>
