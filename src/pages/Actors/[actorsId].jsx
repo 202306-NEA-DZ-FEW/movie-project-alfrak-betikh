@@ -17,6 +17,8 @@ export async function getServerSideProps({ params }) {
   const birthday = actorsBio.birthday;
   const biography = actorsBio.biography;
   const picture = actorsBio.profile_path;
+  const popularity = actorsBio.popularity;
+  const gender = actorsBio.gender;
 
   const actorsInfo = [
     {
@@ -24,6 +26,8 @@ export async function getServerSideProps({ params }) {
       birthday,
       biography,
       picture,
+      popularity,
+      gender,
     },
   ];
 
@@ -50,39 +54,30 @@ function ActorPage({ originalTitles, actorsInfo }) {
 
   // Settings for the Slider component
   const settings = {
-    centerMode: true,
-    centerPadding: "10px",
-    slidesToShow: 3,
-    focusOnSelect: true,
-    responsive: [
-      {
-        breakpoint: 800,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: "40px",
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          arrows: false,
-          centerMode: true,
-          centerPadding: "40px",
-          slidesToShow: 1,
-        },
-      },
-    ],
+    autoplay: true,
+    dots: false,
+    draggable: true,
+    infinite: false,
+    arrows: true,
+    speed: 1000,
+    fade: false,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    slide: "div",
+    cssEase: "linear",
   };
+
+  const shouldRenderSlider = originalTitles.length > 3;
 
   return (
     <div className=" mx-auto w-full">
       <div>
+        {console.log(actorsInfo)}
         {actorsInfo.map((actor, index) => (
           <div key={index} className=" mb-12">
             <div className="flex justify-center mt-10 mb-10">
               <div
+                className="rounded-full transform transition-transform hover:scale-110"
                 style={{
                   borderRadius: "50%",
                   overflow: "hidden",
@@ -98,8 +93,7 @@ function ActorPage({ originalTitles, actorsInfo }) {
                   height={100}
                 />
               </div>
-
-              <h1 className="text-6xl font-bold font-Calvino mt-4 ml-4  ">
+              <h1 className="text-6xl font-bold font-TitleFont mt-4 ml-4  ">
                 {actor.name}
               </h1>
             </div>
@@ -107,20 +101,50 @@ function ActorPage({ originalTitles, actorsInfo }) {
               className=" flex flex-col items-start mx-auto "
               style={{ width: "70%" }}
             >
-              <h3 className=" mt-4 text-white mr-10 ml-30 font-Room ">
-                Date of birth: {actor.birthday}
-              </h3>
+              <div className="flex flex-row">
+                <h3 className="text-content mt-4 mr-3 text-xl  font-TitleFont">
+                  Date of Birth:
+                </h3>
+                <h3 className=" text-content mt-4 text-lg font-ContentFont">
+                  {actor.birthday}
+                </h3>
+              </div>
+              <div className="flex flex-row">
+                <h3 className="text-content mt-4 mr-3 text-xl font-TitleFont">
+                  Gender:
+                </h3>
+                <h3 className="text-content mt-4 text-lg font-ContentFont">
+                  {actor.gender === 2
+                    ? "Male"
+                    : actor.gender === 1
+                    ? "Female"
+                    : "Unknown"}
+                </h3>
+              </div>
+              <div className="flex flex-row">
+                <h3 className="text-content mt-4 mr-3 text-xl font-TitleFont">
+                  Popularity:
+                </h3>
+                <h3 className=" text-content mt-4 text-lg font-ContentFont">
+                  {actor.popularity}
+                </h3>
+              </div>
+
               {/* Biography text with conditional class for collapse/expand */}
-              <p
-                className={`text-white mt-4 font-Room ${
-                  showFullText ? "expanded" : "collapsed"
-                }`}
-              >
-                Biography: {actor.biography}
-              </p>
-              {/* "Read More" button */}
+              <div>
+                <h3 className="text-content mt-4 text-xl underline font-TitleFont">
+                  Biography:
+                </h3>
+                <p
+                  className={`text-content font-ContentFont text-lg text-justify ${
+                    showFullText ? "expanded" : "collapsed"
+                  }`}
+                >
+                  {actor.biography}
+                </p>
+              </div>
               <button
-                className="text-white underline cursor-pointer "
+                className=" text-content underline cursor-pointer font-ContentFont "
                 onClick={toggleText}
               >
                 {showFullText ? "Read Less" : "Read More"}
@@ -129,28 +153,51 @@ function ActorPage({ originalTitles, actorsInfo }) {
           </div>
         ))}
       </div>
-      <Slider
-        {...settings}
-        className=" cursor-pointer mx-auto w-full max-w-[70%] bg-[#450a0a]"
-        class="border-radius"
-      >
-        {originalTitles.slice(0, 5).map((movie, index) => (
-          <li key={index} className="">
-            <div style={{ marginRight: "25px", display: "inline-block" }}>
-              <Image
-                className=""
-                width={300}
-                height={400}
-                src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`}
-                alt={movie.title}
-              />
+      {shouldRenderSlider ? (
+        <Slider
+          {...settings}
+          className="cursor-pointer mx-auto w-full max-w-[70%]"
+        >
+          {originalTitles.slice(0, 5).map((movie, index) => (
+            <div key={index}>
+              <div style={{ marginRight: "25px", display: "inline-block" }}>
+                {/* Movie Poster */}
+                <img
+                  width={300}
+                  height={400}
+                  src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`}
+                  alt={movie.title}
+                />
+              </div>
+              <div style={{ marginTop: "10px" }} className="text-center">
+                {/* Movie Title */}
+                {movie.title}
+              </div>
             </div>
-            <div style={{ marginTop: "10px" }} className="text-center">
-              {movie.title}
+          ))}
+        </Slider>
+      ) : (
+        // Render movies without the slider
+        <div className="flex flex-wrap justify-center">
+          {originalTitles.map((movie, index) => (
+            <div key={index} className="m-4">
+              <div style={{ marginRight: "25px", display: "inline-block" }}>
+                {/* Movie Poster */}
+                <img
+                  width={200}
+                  height={300}
+                  src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`}
+                  alt={movie.title}
+                />
+              </div>
+              <div style={{ marginTop: "10px" }} className="text-center">
+                {/* Movie Title */}
+                {movie.title}
+              </div>
             </div>
-          </li>
-        ))}
-      </Slider>
+          ))}
+        </div>
+      )}
       <style jsx>{`
         /* Styles for the "Read More" button */
         button {

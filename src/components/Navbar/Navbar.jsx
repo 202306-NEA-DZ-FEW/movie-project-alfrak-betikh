@@ -56,7 +56,7 @@ const Navbar = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 -ml-1 mr-3 text-content hover:text-accent"
+                  className="h-6 w-6 -ml-1 mr-3 text-darkgray hover:text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -74,7 +74,7 @@ const Navbar = () => {
               <svg
                 onClick={handleDelete}
                 xmlns="http://www.w3.org/2000/svg"
-                className="ml-3 h-5 w-5 text-content hover:text-accent"
+                className="ml-3 h-5 w-5 text-darkgray hover:text-accent"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

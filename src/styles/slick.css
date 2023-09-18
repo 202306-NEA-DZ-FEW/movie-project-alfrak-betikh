@@ -68,3 +68,20 @@
 .slick-slider {
   z-index: 1;
 }
+
+.slick-arrow.slick-prev,
+.slick-arrow.slick-next {
+  display: none;
+  color: red; /* Change the arrow color */
+  background-color: transparent; /* Change the background color */
+  border-radius: 50%; /* Optional: Round the arrow container */
+  width: px; /* Optional: Adjust the arrow container width */
+  height: 40px; /* Optional: Adjust the arrow container height */
+}
+
+/* Customize the arrow hover styles */
+.slick-arrow.slick-prev:hover,
+.slick-arrow.slick-next:hover {
+  color: blue; /* Change the hover color */
+  background-color: transparent; /* Change the hover background color */
+}

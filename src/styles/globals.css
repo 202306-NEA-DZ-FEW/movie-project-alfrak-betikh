@@ -2,26 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url(../fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Wremena Bold";
+  src: url(../fonts/Wremena\ Bold.woff);
+}
+
 @layer base {
   :root[data-theme="light"] {
-    --color-bkg: 238 238 238;
-    --color-content: 34 40 49;
+    --color-bkg: 237 237 237;
+    --color-content: 18 18 18;
     --color-accent-1: 255 211 105;
   }
   :root[data-theme="dark"] {
-    --color-bkg: 34 40 49;
-    --color-content: 238 238 238;
+    --color-bkg: 18 18 18;
+    --color-content: 237 237 237;
     --color-accent-1: 255 211 105;
   }
   @media (prefers-color-scheme: dark) {
     :root[data-theme="light"] {
-      --color-bkg: 238 238 238;
-      --color-content: 34 40 49;
+      --color-bkg: 237 237 237;
+      --color-content: 18 18 18;
       --color-accent: 255 211 105;
     }
     :root[data-theme="dark"] {
-      --color-bkg: 34 40 49;
-      --color-content: 238 238 238;
+      --color-bkg: 18 18 18;
+      --color-content: 237 237 237;
       --color-accent: 255 211 105;
     }
   }

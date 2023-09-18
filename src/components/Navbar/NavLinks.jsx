@@ -80,7 +80,7 @@ export default function NavLinks({ open, setOpen }) {
                       {link.sublinks.map((sublink, index) => (
                         <div
                           key={index}
-                          className="text-sm text-content my-1.5 hover:text-yellow-500"
+                          className="text-sm text-darkgray my-1.5 hover:text-gray-600"
                         >
                           <Link
                             href={{

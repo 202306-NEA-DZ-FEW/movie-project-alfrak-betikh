@@ -1,12 +1,11 @@
 import React from "react";
 import { fetcher } from "@/utils/API";
-import ActorCard from "@/components/ActorCard";
+import ActorCard from "@/components/Cards/ActorCard";
 import Link from "next/link";
 import Pagination from "@/components/Pagination";
 import { useRouter } from "next/router";
 
 export async function getServerSideProps({ query }) {
-  //   Use the fetcher function to retrieve data from the API
   const page = parseInt(query.page, 10) || 1;
 
   const data = await fetcher(`person/popular?page=${page}`);
@@ -32,7 +31,7 @@ const index = ({ actors, currentPage }) => {
           </Link>
         ))}
       </div>
-      <div className="pagination flex justify-center">
+      <div className="pagination flex justify-center mt-24">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

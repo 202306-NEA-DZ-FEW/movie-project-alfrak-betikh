@@ -17,7 +17,7 @@ const Pagination = ({ currentPage, totalPages, getPageLink }) => {
         key={page}
       >
         <li
-          className={`relative block rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent ${
+          className={`relative block text-lg rounded px-3 py-1.5  text-content transition-all duration-300 hover:bg-accent ${
             currentPage === page ? "bg-accent text-white" : ""
           }`}
         >
@@ -30,7 +30,7 @@ const Pagination = ({ currentPage, totalPages, getPageLink }) => {
   const renderDots = () => (
     <li
       key="dots"
-      className="relative block rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent"
+      className="relative block rounded px-3 py-1.5 text-lg text-content transition-all duration-300 hover:bg-accent"
     >
       ...
     </li>
@@ -54,7 +54,7 @@ const Pagination = ({ currentPage, totalPages, getPageLink }) => {
     <ul className="list-style-none flex">
       {currentPage > 1 && (
         <Link href={getPageLink(currentPage - 1)} key="prev">
-          <li className="relative block font-bold rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent">
+          <li className="relative block font-bold rounded px-3 py-1.5 text-lg text-content transition-all duration-300 hover:bg-accent">
             Previous
           </li>
         </Link>
@@ -76,7 +76,7 @@ const Pagination = ({ currentPage, totalPages, getPageLink }) => {
 
       {currentPage < totalPages - 1 && (
         <Link href={getPageLink(currentPage + 1)} key="next">
-          <li className="relative block font-bold rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent">
+          <li className="relative block font-bold rounded px-3 py-1.5 text-lg text-content transition-all duration-300 hover:bg-accent">
             Next
           </li>
         </Link>

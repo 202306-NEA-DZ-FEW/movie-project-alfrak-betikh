@@ -21,7 +21,7 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
     autoplay: !hoveredIndex,
     infinite: true,
     arrows: true,
-    speed: 4000,
+    speed: 1000,
     fade: false,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -34,7 +34,7 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {/* Movie Poster */}
-            <div className="md:flex md:flex-col md:items-center md:justify-center">
+            <div className="md:flex md:flex-col md:items-center md:justify-center ">
               <Image
                 width={500}
                 height={500}
@@ -66,9 +66,8 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
                 ))}
               </div>
             </div>
-
-            <div className="">
-              <h1 className="text-3xl font-semibold text-content">
+            <div>
+              <h1 className="text-3xl font-TitleFont font-lg text-content">
                 {movie.title}
               </h1>
               <p className="text-content text-lg mt-2 italic">
