@@ -24,7 +24,7 @@ function DarkButton() {
     <div>
       <button
         onClick={toggleDark}
-        className="bg-bkg p-2 rounded transition-colors duration-300 ease-in-out"
+        className="bg-bkg p-2 pt-4 rounded transition-colors duration-300 ease-in-out lg:ml-5"
       >
         {isDark ? "🌙" : "☀️"}
       </button>
