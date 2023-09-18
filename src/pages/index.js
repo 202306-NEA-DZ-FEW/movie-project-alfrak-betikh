@@ -30,33 +30,31 @@ export default function Home({ latestMovies }) {
   };
 
   return (
-    <div className="flex flex-row mt-5">
-      <div className="flex flex-wrap mx-auto mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
-        <div className="w-full sm:p-4 px-4 mb-6">
-          <h1 className="title-font font-medium text-6xl mb-2 text-content">
+    <div className="flex flex-col lg:flex-row mt-5">
+      <div className="lg:w-1/2 sm:w-full sm:pr-4">
+        <div className="px-4 mb-6">
+          <h1 className="text-4xl sm:text-6xl mb-2 text-content mx-auto text-center">
             Welcome to the Ultimate Movie Destination
           </h1>
-          <p className="leading-relaxed text-content">
+          <p className="text-content">
             Explore the exciting world of cinema with us! Discover the latest
             blockbusters, top-rated classics, and much more. Our curated
             collection of movies and actors will keep you entertained for hours.
-            Whether you&apos;re a film enthusiast or just looking for a great
-            movie night, we&apos;ve got you covered. Dive into the world of
-            cinema today!
+            Whether you're a film enthusiast or just looking for a great
+            movie night, we've got you covered. Dive into the world of cinema today!
           </p>
           <Link
-            className="relative text-xl block text-content font-bold mt-5 w-fit  after:block after:content-[''] after:absolute after:h-[3px] after:bg-yellow-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+            className="relative text-lg sm:text-xl block text-content font-bold mt-5 w-fit after:block after:content-[''] after:absolute after:h-[2px] after:bg-yellow-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
             href={{
               pathname: "/Movies",
               query: { type: "latest" },
             }}
           >
-            {" "}
-            Check The Latest Movies{" "}
+            Check The Latest Movies
           </Link>
         </div>
       </div>
-      <div className="w-96 px-2 mx-auto">
+      <div className="w-full lg:w-96 px-2 mx-auto mt-5 lg:mt-0">
         <Slider {...settings}>
           {latestMovies.results.slice(0, 15).map((movie) => (
             <div key={movie.id}>
@@ -69,4 +67,6 @@ export default function Home({ latestMovies }) {
       </div>
     </div>
   );
+  
+  
 }

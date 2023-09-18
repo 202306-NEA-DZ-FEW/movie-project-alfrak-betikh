@@ -52,15 +52,15 @@ const Index = ({ movies, currentPage, query }) => {
   const totalPages = 50;
 
   return (
-    <div className="container">
-      <div className="grid grid-cols-4">
+    <div className="container mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {movies.results.map((movie) => (
           <Link href={"Movies/" + movie.id} key={movie.id}>
             <MovieCard {...movie} key={movie.id} />
           </Link>
         ))}
       </div>
-      <div className="pagination flex justify-center">
+      <div className="mt-4 flex justify-center">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -70,6 +70,7 @@ const Index = ({ movies, currentPage, query }) => {
       </div>
     </div>
   );
+  
 };
 
 export default Index;

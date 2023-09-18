@@ -25,8 +25,9 @@ const MovieCard = ({ id, title, name, poster_path }) => {
             />
           )}
         </div>
-        <div className="mt-4 flex justify-center">
-          <h2 className="text-center title-font text-lg font-medium text-wrap break-words max-w-[200px]">
+        <div className="mt-4 flex justify-center w-full">
+          <h2 className=" text-center title-font text-lg font-medium text-wrap break-words max-w-[200px]">
+
             {title || name}
           </h2>
         </div>
