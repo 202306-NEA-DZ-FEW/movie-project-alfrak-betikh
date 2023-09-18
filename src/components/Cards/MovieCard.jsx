@@ -4,13 +4,13 @@ import Link from "next/link";
 
 const MovieCard = ({ id, title, name, poster_path }) => {
   return (
-    <div className="m-5 w-full  text-content hover:text-accent" key={id}>
+    <div className=" w-full  text-content hover:text-accent" key={id}>
       <div className="flex flex-col h-full rounded ">
         <div className="relative h-48">
           <Image
             alt="image"
             layout="fill"
-            className="rounded-xl object-contain"
+            className="rounded-xl object-contain w-30 h-50"
             src={"http://image.tmdb.org/t/p/w500" + poster_path}
           />
         </div>

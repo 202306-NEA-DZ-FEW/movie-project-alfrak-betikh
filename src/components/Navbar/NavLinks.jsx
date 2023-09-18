@@ -115,7 +115,7 @@ export default function NavLinks({ open, setOpen }) {
                             setOpen(false);
                           }
                         }}
-                        className="py-4 pl-7 text-content font-semibold md:pr-0 pr-5 flex justify-between items-center"
+                        className="py-4 pl-7 text-content md:pr-0 pr-5 flex justify-between items-center"
                       >
                         <Link
                           href={{

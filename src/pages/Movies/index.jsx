@@ -38,8 +38,8 @@ export async function getServerSideProps({ query }) {
 
 const index = ({ movies }) => {
   return (
-    <div className="container ">
-      <div className="grid grid-cols-4">
+    <div className="container">
+      <div>
         {movies.results.map((movie) => (
           <Link href={"Movies/" + movie.id} key={movie.id}>
             <MovieCard {...movie} key={movie.id} />

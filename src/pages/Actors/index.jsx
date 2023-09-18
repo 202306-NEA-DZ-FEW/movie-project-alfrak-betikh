@@ -16,9 +16,9 @@ export async function getServerSideProps() {
 
 const index = ({ actors }) => {
   return (
-    <div className="container px-5 py-24 mx-auto">
+    <div className="container mx-auto">
       {console.log({ actors })}
-      <div className="flex flex-wrap -m-4">
+      <div className="flex flex-wrap justify-center mt-10 ">
         {actors.results.map((actor) => (
           <Link key={actor.id} href={"/Actors/" + actor.id}>
             <ActorCard {...actor} />
