@@ -15,7 +15,7 @@ const MovieCard = ({ id, title, name, poster_path }) => {
             src={"http://image.tmdb.org/t/p/w500" + poster_path}
           />
         </div>
-        <div className="mt-4 flex justify-center">
+        <div className="mt-4 flex justify-center w-full">
           <h2 className=" text-center title-font text-lg font-medium text-wrap break-words max-w-[200px]">
             {title || name}
           </h2>
