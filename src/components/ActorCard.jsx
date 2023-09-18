@@ -18,7 +18,7 @@ const ActorCard = ({ id, name, profile_path }) => {
       </div>
       <div className="mt-4 ">
         <h2 className="text-slate-200 title-font text-lg font-medium">
-          {name}{" "}
+          {name}
         </h2>
       </div>
     </div>

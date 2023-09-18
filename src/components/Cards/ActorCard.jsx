@@ -1,10 +1,14 @@
+import Image from "next/image";
 import React from "react";
+import { Loader } from "../Loader";
 
 const ActorCard = ({ id, name, profile_path }) => {
   return (
     <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={id}>
       <a className="block relative h-48 rounded overflow-hidden">
-        <image
+        <Image
+          width={500}
+          height={500}
           className="object-fit object-center w-full h-full block rounded-xl"
           src={"http://image.tmdb.org/t/p/w500" + profile_path}
         />
