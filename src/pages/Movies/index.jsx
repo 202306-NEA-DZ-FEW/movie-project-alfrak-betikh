@@ -30,14 +30,26 @@ export async function getServerSideProps({ query, req }) {
       }
   }
 
-  const data = await fetcher(apiUrl);
-  return {
-    props: {
-      movies: data,
-      currentPage: page,
-      query,
-    },
-  };
+  try {
+    const [movies] = await Promise.all([fetcher(apiUrl)]);
+
+    return {
+      props: {
+        movies,
+        currentPage: page,
+        query,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        movies: null,
+        currentPage: page,
+        query,
+      },
+    };
+  }
 }
 
 const Index = ({ movies, currentPage, query }) => {
@@ -70,7 +82,6 @@ const Index = ({ movies, currentPage, query }) => {
       </div>
     </div>
   );
-  
 };
 
 export default Index;

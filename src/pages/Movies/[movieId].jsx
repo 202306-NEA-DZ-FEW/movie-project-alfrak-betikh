@@ -154,22 +154,22 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
                       </div>
                     ))}
                   </div>
-                  <iframe
-                    className="-mt-7 ml-2"
-                    width="320"
-                    height="180"
-                    src={`https://www.youtube.com/embed/${videoId}`}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    frameBorder="1"
-                    allowFullScreen
-                  ></iframe>
                 </div>
               )}
             </div>
           </div>
         </div>
       </div>
+      <iframe
+        className="mt-5 ml-2"
+        width="100%"
+        height="300vh"
+        src={`https://www.youtube.com/embed/${videoId}`}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        frameBorder="1"
+        allowFullScreen
+      ></iframe>
       <br />
       <div className="mx-20 my-5">
         <h2 className="text-2xl font-semibold text-center my-8 text-content">
@@ -209,16 +209,32 @@ export default MovieDetail;
 
 export async function getServerSideProps({ params }) {
   const { movieId } = params;
-  const similarData = await fetcher(`movie/${movieId}/similar`);
-  const data = await fetcher(`movie/${movieId}`);
-  const videos = await fetcher(`movie/${movieId}/videos`);
-  const actors = await fetcher(`movie/${movieId}/credits`);
-  return {
-    props: {
-      movie: data,
-      similarMovies: similarData,
-      videos: videos,
-      actors: actors,
-    },
-  };
+
+  try {
+    const [data, similarData, videos, actors] = await Promise.all([
+      fetcher(`movie/${movieId}`),
+      fetcher(`movie/${movieId}/similar`),
+      fetcher(`movie/${movieId}/videos`),
+      fetcher(`movie/${movieId}/credits`),
+    ]);
+
+    return {
+      props: {
+        movie: data,
+        similarMovies: similarData,
+        videos,
+        actors,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        movie: null,
+        similarMovies: null,
+        videos: null,
+        actors: null,
+      },
+    };
+  }
 }
