@@ -60,7 +60,7 @@ export default function Home({ latestMovies }) {
         <Slider {...settings}>
           {latestMovies.results.slice(0, 15).map((movie) => (
             <div key={movie.id}>
-              <Link href={"movies" + movie.id}>
+              <Link href={"Movies/" + movie.id} key={movie.id}>
                 <Card {...movie} />
               </Link>
             </div>

@@ -1,19 +1,34 @@
-// Pagination.js
-
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Pagination = ({ currentPage, totalPages, getPageLink }) => {
-  const renderPageLink = (page) => (
-    <Link href={getPageLink(page)}>
-      <li
-        className={`relative block rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent ${
-          currentPage === page ? "bg-accent text-white" : ""
-        }`}
-      >
-        {page}
-      </li>
-    </Link>
-  );
+  const router = useRouter();
+  const { query } = router;
+
+  const renderPageLink = (page) => {
+    const newQuery = {
+      ...query,
+      page: page.toString(),
+    };
+
+    for (const key in newQuery) {
+      if (newQuery[key] === undefined || newQuery[key] === null) {
+        delete newQuery[key];
+      }
+    }
+
+    return (
+      <Link href={{ pathname: router.pathname, query: newQuery }}>
+        <li
+          className={`relative block rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent ${
+            currentPage === page ? "bg-accent text-white" : ""
+          }`}
+        >
+          {page}
+        </li>
+      </Link>
+    );
+  };
 
   const renderDots = () => (
     <li className="relative block rounded px-3 py-1.5 text-sm text-content transition-all duration-300 hover:bg-accent">

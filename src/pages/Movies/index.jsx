@@ -3,6 +3,7 @@ import Pagination from "@/components/Pagination";
 import { fetcher } from "@/utils/API";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export async function getServerSideProps({ query }) {
   let apiUrl;
