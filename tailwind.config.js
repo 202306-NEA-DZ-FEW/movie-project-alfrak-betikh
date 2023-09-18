@@ -21,6 +21,8 @@ module.exports = {
         bkg: "rgb(var(--color-bkg) / <alpha-value>)",
         content: "rgb(var(--color-content) / <alpha-value>)",
         accent: "rgb(var(--color-accent) / <alpha-value>)",
+        darkgray: "#0F0F0F",
+        whitebeige: "#EDEDED",
       },
     },
   },

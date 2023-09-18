@@ -8,7 +8,7 @@ const Item = ({ Links, title }) => {
         Links.map((link) => (
           <li key={link.name}>
             <a
-              className="text-content/80 hover:text-yellow-400 duration-300
+              className="text-whitebeige hover:text-yellow-400 duration-300
           text-sm cursor-pointer leading-6"
               href={link.link}
               target="_blank"

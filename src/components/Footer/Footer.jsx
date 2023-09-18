@@ -3,13 +3,14 @@ import ItemsContainer from "./ItemsContainer";
 
 const Footer = () => {
   return (
-    <footer className=" bg-gray-500 text-content/80 mt-24">
+    <footer className="bg-darkgray text-whitebeige mt-24 w-full">
       <div className="md:flex md:justify-center md:items-center sm:px-12 px-4 bg-bkg/20 py-4">
         <h1
           className="lg:text-3xl text-2xl md:mb-0 mb-6 lg:leading-normal font-semibold
-         md:w-2/5"
+         md:w-2/5 text-center justify-center"
         >
-          Made with love & <span className="text-accent">panda tears</span>
+          Made with love &{" "}
+          <span className="text-accent mx-auto text-center">panda tears</span>
         </h1>
       </div>
       <ItemsContainer />
