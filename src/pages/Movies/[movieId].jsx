@@ -89,11 +89,11 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
                       {/* Add a unique key for each company */}
                       {company.logo_path && (
                         <div className=" w-full p-2 text-center overflow-clip">
-                          <h1 className="font-semibold text-xs text-content mt-5">
+                          <h1 className=" text-sm text-content mt-5 font-bold">
                             {company.name}
                           </h1>
                           <Image
-                            className="w-1/2 md:w-full h-auto mx-auto rounded-lg"
+                            className="w-1/4 md:w-full h-auto mx-auto rounded-lg md:h-1/2"
                             src={`https://image.tmdb.org/t/p/original/${company.logo_path}`}
                             alt={company.name}
                             width={10}
@@ -144,7 +144,7 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
                 </div>
 
                 <div className="flex ">
-                  <div className="flex mt-5">
+                  <div className="flex mt-5 ">
                     <p className="text-content font-bold mr-2">Genres: </p>
                     {movie.genres.map((genre, index) => (
                       <Link
@@ -161,29 +161,29 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
                   </div>
                 </div>
                 {videoId && (
-                  <div className=" flex justify-center">
-                    <div className="flex  justify-center my-5  ">
+                  <div className=" flex justify-center items-center">
+                    <div className="flex  justify-center my-5 flex-wrap ">
                       {actors.cast.slice(0, 5).map((actor) => (
                         <div
-                          className="mx-3 hover:text-accent text-content"
+                          className=" hover:text-accent text-content mx-5"
                           key={actor.id}
                         >
                           <Link key={actor.id} href={"/Actors/" + actor.id}>
                             {actor.profile_path ? (
                               <Image
-                                className="rounded-full transform transition-transform hover:scale-110 mx-5"
+                                className="rounded-full transform transition-transform hover:scale-110 "
                                 src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
                                 alt="actor"
-                                width={50}
-                                height={50}
+                                width={75}
+                                height={75}
                               />
                             ) : (
                               <Image
                                 className="rounded-full transform transition-transform hover:scale-110"
                                 src="https://via.placeholder.com/150x150"
                                 alt="actor"
-                                width={50}
-                                height={50}
+                                width={75}
+                                height={75}
                               />
                             )}
                             <p className="text-wrap text-xs mt-1 w-[50px] font-bold text-center">
@@ -199,17 +199,18 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
             </div>
           </div>
         </div>
+
+        <br className="text-content" />
         <iframe
-          className="mt-5 ml-2"
+          className="flex justify-center items-center flex-col mt-5 ml-2"
           width="100%"
-          height="300vh"
+          height="350vh"
           src={`https://www.youtube.com/embed/${videoId}`}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           frameBorder="1"
           allowFullScreen
         ></iframe>
-        <br />
         <div className="mx-20 my-5">
           <h2 className="text-2xl font-semibold text-center my-8 text-content">
             Similar Movies

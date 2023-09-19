@@ -41,3 +41,13 @@ body {
 
   overflow-x: hidden;
 }
+
+.expanded {
+  max-height: none;
+  overflow: visible;
+}
+
+.collapsed {
+  max-height: 120px;
+  overflow: hidden;
+}
