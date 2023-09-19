@@ -6,7 +6,7 @@ const ActorCard = ({ id, name, profile_path }) => {
   return (
     <>
       <Head>
-        <title>10 melon | Actor page</title>
+        <title>10 Melon | Actor page</title>
         <meta name="keywords" content="actor page"></meta>
         <link rel="icon" href="/logo.ico" />
       </Head>

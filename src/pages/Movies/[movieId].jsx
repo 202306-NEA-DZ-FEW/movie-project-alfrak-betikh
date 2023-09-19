@@ -65,7 +65,7 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
   return (
     <>
       <Head>
-        <title>10 melon | {movie.title}</title>
+        <title>10 Melon | {movie.title}</title>
         <meta name="keywords" content="actors"></meta>
         <link rel="icon" href="/logo.ico" />
       </Head>

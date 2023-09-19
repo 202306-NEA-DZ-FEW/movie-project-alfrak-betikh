@@ -106,7 +106,7 @@ function ActorPage({ originalTitles, actorsInfo }) {
   return (
     <>
       <Head>
-        <title>10 melon | {actorsInfo[0].name} </title>
+        <title>10 Melon | {actorsInfo[0].name} </title>
         <meta name="keywords" content="actor"></meta>
         <link rel="icon" href="/logo.ico" />
       </Head>

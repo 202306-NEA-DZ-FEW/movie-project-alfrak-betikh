@@ -67,7 +67,7 @@ const Index = ({ movies, currentPage, query }) => {
   return (
     <>
       <Head>
-        <title>10 melon | Movies</title>
+        <title>10 Melon | Movies</title>
         <meta name="keywords" content="movies"></meta>
         <link rel="icon" href="/logo.ico" />
       </Head>

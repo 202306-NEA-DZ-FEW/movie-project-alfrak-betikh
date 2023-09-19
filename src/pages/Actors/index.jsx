@@ -26,7 +26,7 @@ const index = ({ actors, currentPage }) => {
   return (
     <>
       <Head>
-        <title>10 melon | Actors</title>
+        <title>10 Melon | Actors</title>
         <meta name="keywords" content="actors"></meta>
         <link rel="icon" href="/logo.ico" />
       </Head>

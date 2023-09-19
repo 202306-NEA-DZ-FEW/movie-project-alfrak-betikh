@@ -14,7 +14,7 @@ const MovieDetail = ({ tvData }) => {
   return (
     <>
       <Head>
-        <title>10 melon | {tvData.name}</title>
+        <title>10 Melon | {tvData.name}</title>
         <meta name="keywords" content="actors"></meta>
         <link rel="icon" href="/logo.ico" />
       </Head>
