@@ -6,6 +6,22 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useState } from "react";
 
+const Arrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        background: "#121212",
+
+        borderRadius: "50%",
+      }}
+      onClick={onClick}
+    ></div>
+  );
+};
+
 const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   let videoId;
@@ -16,25 +32,43 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
   console.log(movie);
   console.log("similar", similarMovies);
   const settings = {
+    lazyLoad: "ondemand",
     autoplay: true,
     dots: false,
-    autoplay: !hoveredIndex,
+    draggable: true,
     infinite: true,
     arrows: true,
-    speed: 1000,
+    speed: 2000,
     fade: false,
-    slidesToShow: 4,
+    slidesToShow: 3,
+    nextArrow: <Arrow />,
+    prevArrow: <Arrow />,
     slidesToScroll: 1,
     slide: "div",
-    cssEase: "linear",
+    cssEase: "ease-out",
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
+
   return (
     <div className="">
       <div>
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {/* Movie Poster */}
-            <div className="md:flex md:flex-col md:items-center md:justify-center ">
+            <div className="flex flex-col items-center justify-center ">
               <Image
                 width={500}
                 height={500}
@@ -48,12 +82,12 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
                     {" "}
                     {/* Add a unique key for each company */}
                     {company.logo_path && (
-                      <div className="w-full p-2 text-center overflow-clip">
+                      <div className=" w-full p-2 text-center overflow-clip">
                         <h1 className="font-semibold text-xs text-content mt-5">
                           {company.name}
                         </h1>
                         <Image
-                          className="w-full h-auto mx-auto rounded-lg"
+                          className="w-1/2 md:w-full h-auto mx-auto rounded-lg"
                           src={`https://image.tmdb.org/t/p/original/${company.logo_path}`}
                           alt={company.name}
                           width={10}
@@ -131,7 +165,7 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
                         <Link key={actor.id} href={"/Actors/" + actor.id}>
                           {actor.profile_path ? (
                             <Image
-                              className="rounded-full transform transition-transform hover:scale-110"
+                              className="rounded-full transform transition-transform hover:scale-110 mx-5"
                               src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
                               alt="actor"
                               width={50}
@@ -174,30 +208,32 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
         <h2 className="text-2xl font-semibold text-center my-8 text-content">
           Similar Movies
         </h2>
-        <Slider {...settings} className="flex flex-row space-x-4 ">
-          {similarMovies.results.map((movie, index) => (
-            <div
-              key={movie.id}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(true)}
-            >
-              <Link href={`/Movies/${movie.id}`}>
-                <div
-                  className={`w-40 md:w-60 h-auto cursor-pointer rounded-3xl ${
-                    hoveredIndex === index ? "transform scale-110" : ""
-                  } `}
-                >
-                  <Image
-                    alt={movie.title}
-                    src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    layout="responsive"
-                    width={200} // Adjust this to your desired width
-                    height={40} // Adjust this to your desired height
-                  />
-                </div>
-              </Link>
-            </div>
-          ))}
+        <Slider {...settings} className="cursor-pointer w-full ">
+          {similarMovies.results.map((movie, index) =>
+            !movie.poster_path ? null : (
+              <div
+                key={movie.id}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(true)}
+              >
+                <Link href={`/Movies/${movie.id}`}>
+                  <div
+                    className={`mx-2 cursor-pointer rounded-3xl ${
+                      hoveredIndex === index ? "transform scale-105" : ""
+                    } `}
+                  >
+                    <Image
+                      alt={movie.title}
+                      src={`http://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      width={50}
+                      height={20}
+                      layout="responsive"
+                    />
+                  </div>
+                </Link>
+              </div>
+            ),
+          )}
         </Slider>
       </div>
     </div>

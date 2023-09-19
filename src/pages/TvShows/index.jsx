@@ -1,37 +1,39 @@
 import React from "react";
 import { fetcher } from "@/utils/API";
-import ActorCard from "@/components/Cards/ActorCard";
 import Link from "next/link";
 import Pagination from "@/components/Pagination";
-
+import MovieCard from "@/components/Cards/MovieCard";
+import { useRouter } from "next/router";
 export async function getServerSideProps({ query }) {
   const page = parseInt(query.page, 10) || 1;
 
   const data = await fetcher(
-    `person/popular?page=${page}&?include_adult=false`,
+    `tv/top_rated?page=${page}&?include_adult=false&language=en-US`,
   );
 
   return {
     props: {
-      actors: data,
+      tvShows: data,
       currentPage: page,
     },
   };
 }
 
-const index = ({ actors, currentPage }) => {
+const Index = ({ tvShows, currentPage }) => {
   const getPageLink = (page) => `?page=${page}`;
+
   const totalPages = 50;
+
   return (
-    <div className="container px-5 py-24 mx-auto">
-      <div className="flex flex-wrap -m-4">
-        {actors.results.map((actor) => (
-          <Link key={actor.id} href={"/Actors/" + actor.id}>
-            <ActorCard {...actor} />
+    <div className="container mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {tvShows.results.map((tvShow) => (
+          <Link key={tvShow.id} href={"/TvShows/" + tvShow.id}>
+            <MovieCard {...tvShow} key={tvShow.id} />
           </Link>
         ))}
       </div>
-      <div className="pagination flex justify-center mt-24">
+      <div className="mt-4 flex justify-center">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -42,4 +44,4 @@ const index = ({ actors, currentPage }) => {
   );
 };
 
-export default index;
+export default Index;
