@@ -80,7 +80,7 @@ export default function NavLinks({ open, setOpen }) {
                     <div className="py-3">
                       <div className="w-4 h-4 left-3 absolute mt-1 bg-accent rotate-45"></div>
                     </div>
-                    <div className=" bg-accent p-5 grid  z-50 grid-cols-5 gap-5">
+                    <div className=" bg-accent p-5 grid  z-20 grid-cols-5 gap-5">
                       {link.sublinks.map((sublink, index) => (
                         <div
                           key={index}
@@ -106,6 +106,13 @@ export default function NavLinks({ open, setOpen }) {
               className="relative block text-content font-bold mt-5 w-fit  after:block after:content-[''] after:absolute after:h-[3px] after:bg-yellow-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left
             py-7 justify-between items-center md:pr-0 group pl-4  pr-5"
               href={`/${link.name}`}
+              onClick={() => {
+                heading !== link.name ? setHeading(link.name) : setHeading("");
+                setSubHeading("");
+                if (open) {
+                  setOpen(false);
+                }
+              }}
             >
               {link.name}
             </Link>
