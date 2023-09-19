@@ -1,8 +1,7 @@
 # 10Melon
 
 ![10Melon Screenshot](screenshot-1.png)
-![10Melon Screenshot](screenshot-2.png)
-![10Melon Screenshot](screenshot-3.png)
+
 
 ## Description
 
