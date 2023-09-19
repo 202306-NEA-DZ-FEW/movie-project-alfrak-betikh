@@ -1,0 +1,70 @@
+.dots {
+  position: absolute;
+  bottom: -50px;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+.dots li {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 1px;
+  padding: 0;
+  cursor: pointer;
+}
+.dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: none;
+  background: transparent;
+}
+.dots li button:hover,
+.dots li button:focus {
+  outline: none;
+  opacity: 0.25;
+  color: yellow;
+}
+.dots li button:hover:before .dots li button:focus:before {
+  opacity: 1;
+}
+.dots li button:before {
+  font-family: "slick";
+  font-size: 12px;
+  line-height: 20px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 30px;
+  height: 30px;
+
+  content: "•";
+  text-align: center;
+
+  opacity: 0.25;
+  color: rgb(116, 116, 116);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.dots li.slick-active button:before {
+  opacity: 0.75;
+  color: yellow;
+}
+
+.slick-slider {
+  z-index: 1;
+}
