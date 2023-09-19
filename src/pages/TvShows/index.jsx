@@ -1,6 +1,7 @@
 import React from "react";
 import { fetcher } from "@/utils/API";
 import Link from "next/link";
+import Head from "next/head";
 import Pagination from "@/components/Pagination";
 import MovieCard from "@/components/Cards/MovieCard";
 import { useRouter } from "next/router";
@@ -25,22 +26,29 @@ const Index = ({ tvShows, currentPage }) => {
   const totalPages = 50;
 
   return (
-    <div className="container mx-auto">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {tvShows.results.map((tvShow) => (
-          <Link key={tvShow.id} href={"/TvShows/" + tvShow.id}>
-            <MovieCard {...tvShow} key={tvShow.id} />
-          </Link>
-        ))}
+    <>
+      <Head>
+        <title>10 melon | Tv shows</title>
+        <meta name="keywords" content="actors"></meta>
+        <link rel="icon" href="/logo.ico" />
+      </Head>
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {tvShows.results.map((tvShow) => (
+            <Link key={tvShow.id} href={"/TvShows/" + tvShow.id}>
+              <MovieCard {...tvShow} key={tvShow.id} />
+            </Link>
+          ))}
+        </div>
+        <div className="mt-4 flex justify-center">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            getPageLink={getPageLink}
+          />
+        </div>
       </div>
-      <div className="mt-4 flex justify-center">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          getPageLink={getPageLink}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 
