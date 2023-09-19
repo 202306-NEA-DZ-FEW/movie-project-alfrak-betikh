@@ -28,6 +28,14 @@ export default function Home({ latestMovies }) {
     slide: "div",
     cssEase: "linear",
     dotsClass: "dots",
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          dots: false,
+        },
+      },
+    ],
   };
 
   return (
@@ -37,7 +45,7 @@ export default function Home({ latestMovies }) {
         <meta name="keywords" content="movies"></meta>
         <link rel="icon" href="/logo.ico" />
       </Head>
-      <div className="flex flex-row mt-5">
+      <div className="flex sm:flex-row flex-col mt-5">
         <div className="flex flex-wrap mx-auto mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
           <div className="w-full sm:p-4 px-4 mb-6">
             <h1 className="title-font font-medium text-4xl sm:text-6xl mb-2 text-content font-TitleFont  mx-auto text-center sm:text-left">
@@ -65,7 +73,7 @@ export default function Home({ latestMovies }) {
             </Link>
           </div>
         </div>
-        <div className="w-64 md:w-96  px-2 mx-auto mt-5 lg:mt-0">
+        <div className="w-1/2 sm:w-64 md:w-96  px-2 mx-auto mt-5 lg:mt-0">
           <Slider {...settings}>
             {latestMovies.results.slice(0, 15).map((movie) => (
               <div key={movie.id}>

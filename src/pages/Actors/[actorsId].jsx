@@ -132,7 +132,7 @@ function ActorPage({ originalTitles, actorsInfo }) {
                     height={100}
                   />
                 </div>
-                <h1 className="text-6xl font-bold font-TitleFont mt-4 ml-4  ">
+                <h1 className="text-6xl font-bold font-TitleFont mt-4 ml-4 text-content  ">
                   {actor.name}
                 </h1>
               </div>

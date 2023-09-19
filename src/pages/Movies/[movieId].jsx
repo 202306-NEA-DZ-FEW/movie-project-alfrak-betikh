@@ -150,7 +150,7 @@ const MovieDetail = ({ movie, similarMovies, videos, actors }) => {
                       <Link
                         href={{
                           pathname: "/Movies",
-                          query: { search: genre.name },
+                          query: { genre: genre.id },
                         }}
                         className="ml-5 bg-accent text-black p-1 font-bold rounded-lg hover:text-black/20"
                         key={genre.id}
