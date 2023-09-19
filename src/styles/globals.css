@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url(../fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Wremena Bold";
+  src: url(../fonts/Wremena\ Bold.woff);
+}
+
+@layer base {
+  :root[data-theme="light"] {
+    --color-bkg: 237 237 237;
+    --color-content: 18 18 18;
+    --color-accent: 255 211 105;
+  }
+  :root[data-theme="dark"] {
+    --color-bkg: 18 18 18;
+    --color-content: 237 237 237;
+    --color-accent: 255 211 105;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root[data-theme="light"] {
+      --color-bkg: 237 237 237;
+      --color-content: 18 18 18;
+      --color-accent: 255 211 105;
+    }
+    :root[data-theme="dark"] {
+      --color-bkg: 18 18 18;
+      --color-content: 237 237 237;
+      --color-accent: 255 211 105;
+    }
+  }
+}
+body {
+  color: rgb(var(--foreground-rgb));
+
+  overflow-x: hidden;
+}
+
+.expanded {
+  max-height: none;
+  overflow: visible;
+}
+
+.collapsed {
+  max-height: 120px;
+  overflow: hidden;
+}
