@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
+import Link from "next/link";
 
 export async function getServerSideProps({ params }) {
   const { actorsId } = params;
@@ -32,6 +33,7 @@ export async function getServerSideProps({ params }) {
   ];
 
   const originalTitles = actorData.cast.map((castMember) => ({
+    id: castMember.id,
     title: castMember.original_title,
     posterPath: castMember.poster_path,
   }));
@@ -42,22 +44,35 @@ export async function getServerSideProps({ params }) {
     },
   };
 }
+const Arrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        background: "#121212",
+
+        borderRadius: "50%",
+      }}
+      onClick={onClick}
+    ></div>
+  );
+};
 
 function ActorPage({ originalTitles, actorsInfo }) {
-  // State to track whether the biography text is fully displayed or not
   const [showFullText, setShowFullText] = useState(false);
 
-  // Function to toggle the visibility of the biography text
   const toggleText = () => {
     setShowFullText(!showFullText);
   };
 
-  // Settings for the Slider component
   const settings = {
+    lazyLoad: "ondemand",
     autoplay: true,
     dots: false,
     draggable: true,
-    infinite: false,
+    infinite: true,
     arrows: true,
     speed: 1000,
     fade: false,
@@ -65,6 +80,22 @@ function ActorPage({ originalTitles, actorsInfo }) {
     slidesToScroll: 1,
     slide: "div",
     cssEase: "linear",
+    nextArrow: <Arrow />,
+    prevArrow: <Arrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   const shouldRenderSlider = originalTitles.length > 3;
@@ -160,16 +191,21 @@ function ActorPage({ originalTitles, actorsInfo }) {
         >
           {originalTitles.slice(0, 5).map((movie, index) => (
             <div key={index}>
-              <div style={{ marginRight: "25px", display: "inline-block" }}>
+              <div className="mx-2 inline-block">
                 {/* Movie Poster */}
-                <img
-                  width={300}
-                  height={400}
-                  src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`}
-                  alt={movie.title}
-                />
+                <Link href={`/Movies/${movie.id}`}>
+                  <img
+                    width={300}
+                    height={400}
+                    src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`}
+                    alt={movie.title}
+                  />
+                </Link>
               </div>
-              <div style={{ marginTop: "10px" }} className="text-center">
+              <div
+                style={{ marginTop: "10px" }}
+                className="text-center text-content"
+              >
                 {/* Movie Title */}
                 {movie.title}
               </div>
@@ -181,16 +217,23 @@ function ActorPage({ originalTitles, actorsInfo }) {
         <div className="flex flex-wrap justify-center">
           {originalTitles.map((movie, index) => (
             <div key={index} className="m-4">
-              <div style={{ marginRight: "25px", display: "inline-block" }}>
-                {/* Movie Poster */}
-                <img
-                  width={200}
-                  height={300}
-                  src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`}
-                  alt={movie.title}
-                />
-              </div>
-              <div style={{ marginTop: "10px" }} className="text-center">
+              <Link href={`/Movies/${movie.id}`}>
+                <div style={{ marginRight: "25px", display: "inline-block" }}>
+                  {/* Movie Poster */}
+
+                  <img
+                    width={200}
+                    height={300}
+                    src={`https://image.tmdb.org/t/p/w500/${movie.posterPath}`}
+                    alt={movie.title}
+                  />
+                </div>
+              </Link>
+
+              <div
+                style={{ marginTop: "10px" }}
+                className="text-center text-content"
+              >
                 {/* Movie Title */}
                 {movie.title}
               </div>
@@ -198,32 +241,6 @@ function ActorPage({ originalTitles, actorsInfo }) {
           ))}
         </div>
       )}
-      <style jsx>{`
-        /* Styles for the "Read More" button */
-        button {
-          background: none;
-          border: none;
-          cursor: pointer;
-          font-size: 14px;
-        }
-
-        button.hide {
-          display: none;
-        }
-
-        /* Styles for the collapsed and expanded biography text */
-        p.collapsed {
-          max-height: 100px;
-          overflow: hidden;
-          transition: max-height 0.3s ease-in-out;
-        }
-
-        p.expanded {
-          max-height: none;
-          overflow: auto;
-          transition: max-height 0.3s ease-in-out;
-        }
-      `}</style>
     </div>
   );
 }

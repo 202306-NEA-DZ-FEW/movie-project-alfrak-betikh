@@ -16,12 +16,12 @@
   :root[data-theme="light"] {
     --color-bkg: 237 237 237;
     --color-content: 18 18 18;
-    --color-accent-1: 255 211 105;
+    --color-accent: 255 211 105;
   }
   :root[data-theme="dark"] {
     --color-bkg: 18 18 18;
     --color-content: 237 237 237;
-    --color-accent-1: 255 211 105;
+    --color-accent: 255 211 105;
   }
   @media (prefers-color-scheme: dark) {
     :root[data-theme="light"] {

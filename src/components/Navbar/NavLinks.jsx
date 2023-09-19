@@ -47,6 +47,10 @@ export default function NavLinks({ open, setOpen }) {
       name: "Actors",
       submenu: false,
     },
+    {
+      name: "TvShows",
+      submenu: false,
+    },
   ];
 
   const [subHeading, setSubHeading] = useState("");
@@ -100,10 +104,8 @@ export default function NavLinks({ open, setOpen }) {
           ) : (
             <Link
               className="relative block text-content font-bold mt-5 w-fit  after:block after:content-[''] after:absolute after:h-[3px] after:bg-yellow-500 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left
-            py-7 justify-between items-center md:pr-0 pr-5 group"
-              href={{
-                pathname: link.name,
-              }}
+            py-7 justify-between items-center md:pr-0 group pl-4  pr-5"
+              href={`/${link.name}`}
             >
               {link.name}
             </Link>
