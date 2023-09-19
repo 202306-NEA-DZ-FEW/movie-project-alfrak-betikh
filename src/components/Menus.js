@@ -1,16 +1,11 @@
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 const createPersonLinks = (name, githubLink, linkedinLink) => [
   {
     name: "Github ",
     link: githubLink,
-    icon: <FontAwesomeIcon icon={faGithub} />,
   },
   {
     name: "Linkedin ",
     link: linkedinLink,
-    icon: <FontAwesomeIcon icon={faLinkedin} />,
   },
 ];
 

@@ -8,14 +8,12 @@ const Item = ({ Links, title }) => {
         Links.map((link) => (
           <li key={link.name}>
             <a
-              className="text-whitebeige hover:text-yellow-400 duration-300
-          text-sm cursor-pointer leading-6"
+              className="text-whitebeige hover:text-yellow-400 duration-300 text-sm cursor-pointer leading-6 "
               href={link.link}
               target="_blank"
               rel="noopener"
             >
               {link.name}
-              {link.icon}
             </a>
           </li>
         ))}
